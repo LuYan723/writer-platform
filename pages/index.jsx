@@ -21,9 +21,9 @@ export default function Landing() {
           </p>
           <h1 className="cover-title display">
             <span>{zh.name}</span>
-            <span>纸上法学</span>
+            {zh.motto ? <span>{zh.motto}</span> : null}
           </h1>
-          <p className="cover-lede">{zh.tagline}</p>
+          {zh.tagline ? <p className="cover-lede">{zh.tagline}</p> : null}
           <p className="landing-login">
             <Link className="text-link" href="/login">站长登录</Link>
           </p>

@@ -58,7 +58,10 @@ export default function Home({ lang, setup, articles = [] }) {
           </Reveal>
           <div className="mast-grid">
             <Reveal delay={0.08}>
-              <p className="mast-copy">{site.tagline} <strong>{site.intro}</strong></p>
+              <p className="mast-copy">
+                {site.tagline ? <span>{site.tagline} </span> : null}
+                <strong>{site.intro}</strong>
+              </p>
             </Reveal>
             <Reveal delay={0.16}>
               <div className="mast-actions">

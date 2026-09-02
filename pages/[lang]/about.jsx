@@ -20,7 +20,7 @@ export default function About({ lang }) {
           <img className="avatar" src={`/assets/img/seal-${lang}.svg`} alt={site.penName} width="112" height="112" />
           <p className="eyebrow">{lang === "zh" ? "关于" : "About"}</p>
           <h1 className="display page-title">{lang === "zh" ? "写作者" : "The Writer"}</h1>
-          <p className="lede">{site.tagline}</p>
+          {site.tagline ? <p className="lede">{site.tagline}</p> : null}
         </section>
         <section className="section about-body">
           <div className="prose about-prose">
