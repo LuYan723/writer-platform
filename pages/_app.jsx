@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { SmoothScroll } from "@/components/MotionKit";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -23,8 +24,11 @@ export default function App({ Component, pageProps }) {
         <link rel="stylesheet" href="/styles/tokens.css" />
         <link rel="stylesheet" href="/styles/site.css" />
         <link rel="stylesheet" href="/styles/admin.css" />
+        <link rel="stylesheet" href="/styles/editorial.css" />
       </Head>
-      <Component {...pageProps} />
+      <SmoothScroll>
+        <Component {...pageProps} />
+      </SmoothScroll>
     </>
   );
 }

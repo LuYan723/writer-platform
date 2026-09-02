@@ -275,6 +275,18 @@
   color: var(--text3);
 }
 
+.block-hints {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-left: 16px;
+}
+
+.block-hints .text-btn {
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+}
+
 .landing-login {
   margin-top: 42px;
 }

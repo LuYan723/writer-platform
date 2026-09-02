@@ -26,6 +26,10 @@ export default function EditorForm({ lang, isZh, initial, backUrl }) {
     if (field === "body") setPreview(renderMarkdown(value));
   }
 
+  function insertBlock(sample) {
+    set("body", (form.body ? form.body + "\n\n" : "") + sample);
+  }
+
   async function save(e) {
     e.preventDefault();
     setSaving(true);
@@ -81,7 +85,15 @@ export default function EditorForm({ lang, isZh, initial, backUrl }) {
         <input value={form.tags} onChange={(e) => set("tags", e.target.value)} />
       </label>
       <div className="field">
-        <span>{isZh ? "正文（Markdown，支持 ::: quote / point / gallery 块）" : "Body (Markdown with ::: quote / point / gallery blocks)"}</span>
+        <span>
+          {isZh ? "正文（Markdown 富内容块）" : "Body (Markdown rich blocks)"}
+          <span className="block-hints">
+            <button type="button" className="text-btn" onClick={() => insertBlock('::: quote 原文 · 法条\n在这里粘贴引用原文\n:::')}>＋ 引用卡</button>
+            <button type="button" className="text-btn" onClick={() => insertBlock('::: point 观点\n在这里写下你的看法\n:::')}>＋ 观点框</button>
+            <button type="button" className="text-btn" onClick={() => insertBlock('::: gallery\n/assets/img/ink-mountain.svg|远山\n:::')}>＋ 画廊</button>
+            <button type="button" className="text-btn" onClick={() => insertBlock('::: pdf PDF 标题\nhttps://example.com/paper.pdf\n一句话说明（可选）\n:::')}>＋ PDF</button>
+          </span>
+        </span>
         <textarea value={form.body} required rows={22} onChange={(e) => set("body", e.target.value)} />
       </div>
       <label className="field" style={{ display: "flex", gap: 8, alignItems: "center" }}>

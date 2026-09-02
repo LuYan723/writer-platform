@@ -39,8 +39,11 @@ export default function Comments({ slug, lang, isZh }) {
 
   return (
     <section className="comments" aria-label={isZh ? "留言" : "Comments"}>
-      <h2 className="about-subtitle display">{isZh ? "留言" : "Comments"}</h2>
-      <form className="comment-form" onSubmit={submit}>
+      <h2 className="about-subtitle display">
+        {isZh ? "留言" : "Comments"}
+        <span className="comment-count">{items.length}</span>
+      </h2>
+      <form className="comment-form" data-title={isZh ? "写下回应" : "Join the conversation"} onSubmit={submit}>
         <label>
           <span>{isZh ? "你的称呼" : "Your name"}</span>
           <input required maxLength={40} value={name} onChange={(e) => setName(e.target.value)} placeholder={isZh ? "怎么称呼你" : "What should we call you"} />
@@ -60,10 +63,13 @@ export default function Comments({ slug, lang, isZh }) {
         <ul className="comment-list">
           {items.map((c) => (
             <li key={c.id} className="comment-item">
-              <p className="comment-meta">
-                <strong>{c.author_name}</strong>
-                <time dateTime={c.created_at}>{new Date(c.created_at).toLocaleString()}</time>
-              </p>
+              <span className="comment-avatar" aria-hidden="true">{(c.author_name || "?").slice(0, 1).toUpperCase()}</span>
+              <div>
+                <p className="comment-meta">
+                  <strong>{c.author_name}</strong>
+                  <time dateTime={c.created_at}>{new Date(c.created_at).toLocaleString()}</time>
+                </p>
+              </div>
               <p className="comment-body">{c.body}</p>
             </li>
           ))}
