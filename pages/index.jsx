@@ -10,7 +10,7 @@ export default function Landing() {
     <>
       <Head>
         <title>未名集 · Anonymous Archive</title>
-        <meta name="description" content="一名法学出身写作者的写作档案：随笔与法律解析。" />
+        <meta name="description" content="一名写作者的线上档案：随笔、解析与读者留言。" />
       </Head>
       <main className="cover" id="main">
         <div className="cover-main">
