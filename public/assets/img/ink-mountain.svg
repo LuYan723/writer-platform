@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img">
+  <rect width="640" height="480" fill="#0a0d12"/>
+  <circle cx="470" cy="118" r="42" fill="none" stroke="#e0c893" stroke-width="2"/>
+  <circle cx="470" cy="118" r="34" fill="#0a0d12" stroke="#c9a86a" stroke-width="1"/>
+  <path d="M0 390 L150 210 L250 322 L340 190 L470 360 L560 260 L640 330 L640 480 L0 480 Z"
+        fill="none" stroke="#c9a86a" stroke-width="2"/>
+  <path d="M0 410 L640 410" stroke="#8f7a45" stroke-width="1" opacity="0.7"/>
+  <path d="M120 120 q10 -14 20 0 M148 132 q10 -14 20 0 M176 146 q10 -14 20 0"
+        fill="none" stroke="#5fd4c8" stroke-width="1.5" opacity="0.65"/>
+  <text x="32" y="456" font-family="Georgia, serif" font-size="18" fill="#7d7871" letter-spacing="3">INK · 墨</text>
+</svg>

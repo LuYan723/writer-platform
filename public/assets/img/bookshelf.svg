@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img">
+  <rect width="640" height="480" fill="#0a0d12"/>
+  <rect x="70" y="46" width="500" height="388" fill="none" stroke="#c9a86a" stroke-width="2"/>
+  <path d="M70 190 L570 190 M70 334 L570 334" stroke="#c9a86a" stroke-width="2"/>
+  <rect x="100" y="78" width="30" height="108" fill="#171c27" stroke="#8f7a45"/>
+  <rect x="142" y="96" width="26" height="90" fill="#171c27" stroke="#5fd4c8" opacity="0.8"/>
+  <rect x="182" y="66" width="34" height="120" fill="#171c27" stroke="#e0c893"/>
+  <rect x="230" y="90" width="24" height="96" fill="#171c27" stroke="#8f7ae5" opacity="0.8"/>
+  <rect x="390" y="72" width="120" height="20" fill="none" stroke="#7d7871"/>
+  <rect x="100" y="230" width="40" height="98" fill="#171c27" stroke="#e0c893"/>
+  <rect x="152" y="250" width="28" height="78" fill="#171c27" stroke="#8f7ae5" opacity="0.8"/>
+  <rect x="194" y="222" width="30" height="106" fill="#171c27" stroke="#c9a86a"/>
+  <circle cx="512" cy="96" r="6" fill="#e0c893" opacity="0.85"/>
+  <circle cx="532" cy="82" r="3" fill="#e0c893" opacity="0.5"/>
+  <text x="32" y="456" font-family="Georgia, serif" font-size="18" fill="#7d7871" letter-spacing="3">LIBRARY</text>
+</svg>

@@ -1,0 +1,146 @@
+/* ============================================================
+   设计令牌：唯一取值来源是“语义变量”，不是单一固定配色。
+   换主题 = 给 <html data-palette> 换一组变量；自定义色由 JS 写入内联变量。
+   ============================================================ */
+
+:root,
+[data-palette="noir-gold"] {
+  --mode: dark;
+
+  /* 背景与表面 */
+  --bg0: #0a0d12;
+  --bg1: #10141c;
+  --bg2: #171c27;
+  --line: rgba(255, 255, 255, 0.08);
+
+  /* 文字 */
+  --text: #f2eee7;
+  --text2: #b4aea2;
+  --text3: #7d7871;
+
+  /* 主强调（金铜）与点缀（青/紫） */
+  --accent: #c9a86a;
+  --accent-strong: #e0c893;
+  --accent-deep: #8f7a45;
+  --a2: #5fd4c8;
+  --a3: #8f7ae5;
+  --on-accent: #1a140a;
+
+  --grad-title: linear-gradient(100deg, #e0c893, #c9a86a 55%, #8f7a45);
+  --glow-soft: color-mix(in srgb, var(--accent) 13%, transparent);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+  --font-display: Georgia, "Times New Roman", "Songti SC", "Noto Serif SC", "SimSun", serif;
+  --font-body: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-med: 500ms;
+  --radius-card: 12px;
+  --radius-sm: 8px;
+}
+
+/* 宣纸朱砂 · 浅色文墨 */
+[data-palette="paper-cinnabar"] {
+  --mode: light;
+  --bg0: #f4efe3;
+  --bg1: #faf6ec;
+  --bg2: #fffdf6;
+  --line: rgba(41, 34, 22, 0.13);
+  --text: #241f16;
+  --text2: #5c5340;
+  --text3: #948a74;
+  --accent: #b03c27;
+  --accent-strong: #8f2d1b;
+  --accent-deep: #681b0d;
+  --a2: #1d7f74;
+  --a3: #67409b;
+  --on-accent: #fdf6ea;
+  --grad-title: linear-gradient(100deg, #8f2d1b, #b03c27 55%, #681b0d);
+  --glow-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --shadow-card: 0 10px 26px rgba(61, 49, 25, 0.16);
+}
+
+/* 夜航青灯 · 深蓝 + 琥珀 */
+[data-palette="navy-lantern"] {
+  --mode: dark;
+  --bg0: #0a101f;
+  --bg1: #101a2d;
+  --bg2: #18243a;
+  --line: rgba(213, 228, 255, 0.1);
+  --text: #eaeef6;
+  --text2: #a9b3c6;
+  --text3: #6e788c;
+  --accent: #d5a65a;
+  --accent-strong: #ecc383;
+  --accent-deep: #9b6c2f;
+  --a2: #61d4cc;
+  --a3: #8f9bff;
+  --on-accent: #1d1608;
+  --grad-title: linear-gradient(100deg, #ecc383, #d5a65a 55%, #9b6c2f);
+  --glow-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.48);
+}
+
+/* 青瓷夜雨 · 深绿 + 玉色 */
+[data-palette="celadon-night"] {
+  --mode: dark;
+  --bg0: #0a1210;
+  --bg1: #0f1a16;
+  --bg2: #16241f;
+  --line: rgba(210, 240, 224, 0.09);
+  --text: #eaf2ec;
+  --text2: #a9bdb1;
+  --text3: #6f857a;
+  --accent: #a6cbb0;
+  --accent-strong: #c8e2d0;
+  --accent-deep: #6f967d;
+  --a2: #7dd6bf;
+  --a3: #b08ad8;
+  --on-accent: #0c1813;
+  --grad-title: linear-gradient(100deg, #c8e2d0, #a6cbb0 55%, #6f967d);
+  --glow-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.46);
+}
+
+/* 赛博脉冲 · 深紫霓虹（克制使用） */
+[data-palette="cyber-pulse"] {
+  --mode: dark;
+  --bg0: #0c0817;
+  --bg1: #140e24;
+  --bg2: #1d1533;
+  --line: rgba(221, 210, 255, 0.12);
+  --text: #f1edff;
+  --text2: #b6a9d4;
+  --text3: #786a95;
+  --accent: #d5a1ff;
+  --accent-strong: #e9cdff;
+  --accent-deep: #9660cd;
+  --a2: #4fe0d1;
+  --a3: #7f8bff;
+  --on-accent: #160c24;
+  --grad-title: linear-gradient(100deg, #e9cdff, #d5a1ff 55%, #9660cd);
+  --glow-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --shadow-card: 0 10px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* 月白墨蓝 · 浅色清冷 */
+[data-palette="moon-blue"] {
+  --mode: light;
+  --bg0: #f3f5f8;
+  --bg1: #fafbfd;
+  --bg2: #ffffff;
+  --line: rgba(23, 31, 44, 0.13);
+  --text: #202735;
+  --text2: #505b6c;
+  --text3: #8b94a3;
+  --accent: #35608f;
+  --accent-strong: #24486e;
+  --accent-deep: #18304a;
+  --a2: #1c8277;
+  --a3: #7a45ac;
+  --on-accent: #f4f7fb;
+  --grad-title: linear-gradient(100deg, #24486e, #35608f 55%, #18304a);
+  --glow-soft: color-mix(in srgb, var(--accent) 15%, transparent);
+  --shadow-card: 0 10px 26px rgba(25, 33, 48, 0.15);
+}
