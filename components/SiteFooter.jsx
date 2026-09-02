@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 export default function SiteFooter({ lang, isAdmin }) {
@@ -15,6 +16,11 @@ export default function SiteFooter({ lang, isAdmin }) {
         <p className="footer-meta">
           {isAdmin ? (lang === "zh" ? "开发者模式" : "Developer mode") : null}{" "}
           {lang === "zh" ? "手写写作平台 · Next.js + Supabase" : "A hand-built writing platform · Next.js + Supabase"}
+          {!isAdmin ? (
+            <>
+              {" "}· <Link href="/login">{lang === "zh" ? "站长登录" : "Owner sign in"}</Link>
+            </>
+          ) : null}
         </p>
       </div>
     </footer>

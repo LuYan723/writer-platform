@@ -20,6 +20,9 @@ export default function Landing() {
             <Link className="btn btn-gold" href="/zh" lang="zh-CN">进入中文区</Link>
             <Link className="btn" href="/en" lang="en">Enter English</Link>
           </div>
+          <p className="landing-login">
+            <Link className="text-link" href="/login">站长登录</Link>
+          </p>
         </div>
       </main>
       <ThemePalette isZh />

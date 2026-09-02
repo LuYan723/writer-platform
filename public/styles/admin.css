@@ -275,6 +275,16 @@
   color: var(--text3);
 }
 
+.landing-login {
+  margin-top: 42px;
+}
+
+.footer-meta a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (max-width: 720px) {
   .editor-grid {
     grid-template-columns: 1fr;
