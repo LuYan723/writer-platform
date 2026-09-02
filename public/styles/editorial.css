@@ -737,3 +737,27 @@ html[lang="zh-CN"] .display {
     animation: none;
   }
 }
+
+/* 路由切换：顶部进度条，让点击立即可见 */
+.route-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 400;
+  height: 2px;
+  width: 0;
+  background: var(--grad-title);
+  box-shadow: 0 0 12px var(--glow-soft);
+  opacity: 0;
+}
+
+.route-progress.active {
+  opacity: 1;
+  animation: route-load 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes route-load {
+  0% { width: 0; }
+  70% { width: 86%; }
+  100% { width: 100%; opacity: 0.85; }
+}

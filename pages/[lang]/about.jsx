@@ -3,7 +3,11 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { SITE } from "@/lib/site";
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  return { paths: [{ params: { lang: "zh" } }, { params: { lang: "en" } }], fallback: false };
+}
+
+export async function getStaticProps(context) {
   return { props: { lang: ["zh", "en"].includes(context.params.lang) ? context.params.lang : "zh" } };
 }
 

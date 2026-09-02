@@ -1,14 +1,27 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SmoothScroll } from "@/components/MotionKit";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const [routing, setRouting] = useState(false);
   useEffect(() => {
     const first = String(router.asPath || "/").split("/")[1] || "";
     document.documentElement.lang = first === "en" ? "en" : "zh-CN";
   }, [router.asPath]);
+  useEffect(() => {
+    const start = () => setRouting(true);
+    const end = () => setRouting(false);
+    router.events.on("routeChangeStart", start);
+    router.events.on("routeChangeComplete", end);
+    router.events.on("routeChangeError", end);
+    return () => {
+      router.events.off("routeChangeStart", start);
+      router.events.off("routeChangeComplete", end);
+      router.events.off("routeChangeError", end);
+    };
+  }, [router.events]);
   return (
     <>
       <Head>
@@ -27,6 +40,7 @@ export default function App({ Component, pageProps }) {
         <link rel="stylesheet" href="/styles/editorial.css" />
       </Head>
       <SmoothScroll>
+        <div className={routing ? "route-progress active" : "route-progress"} aria-hidden="true" />
         <Component {...pageProps} />
       </SmoothScroll>
     </>

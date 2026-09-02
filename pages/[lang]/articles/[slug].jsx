@@ -9,9 +9,21 @@ import { anonClient, HAS_ENV } from "@/lib/supabase";
 import { formatDate, readingMinutes, typeLabel } from "@/lib/article";
 import { SITE, UI } from "@/lib/site";
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  if (!HAS_ENV) return { paths: [], fallback: "blocking" };
+  const { data } = await anonClient()
+    .from("articles")
+    .select("slug, lang")
+    .eq("published", true);
+  return {
+    paths: (data || []).map((row) => ({ params: { lang: row.lang, slug: row.slug } })),
+    fallback: "blocking"
+  };
+}
+
+export async function getStaticProps(context) {
   const lang = ["zh", "en"].includes(context.params.lang) ? context.params.lang : "zh";
-  if (!HAS_ENV) return { props: { lang, setup: true } };
+  if (!HAS_ENV) return { props: { lang, setup: true }, revalidate: 60 };
   const slug = decodeURIComponent(context.params.slug);
   const { data } = await anonClient()
     .from("articles")
@@ -21,7 +33,7 @@ export async function getServerSideProps(context) {
     .eq("published", true)
     .maybeSingle();
   if (!data) return { notFound: true };
-  return { props: { lang, setup: false, article: data } };
+  return { props: { lang, setup: false, article: data }, revalidate: 60 };
 }
 
 export default function ArticlePage({ lang, setup, article }) {

@@ -8,7 +8,11 @@ import { anonClient, HAS_ENV } from "@/lib/supabase";
 import { formatDate, sortedArticles, typeLabel } from "@/lib/article";
 import { SITE, UI } from "@/lib/site";
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  return { paths: [{ params: { lang: "zh" } }, { params: { lang: "en" } }], fallback: false };
+}
+
+export async function getStaticProps(context) {
   const lang = ["zh", "en"].includes(context.params.lang) ? context.params.lang : "zh";
   if (!HAS_ENV) return { props: { lang, setup: true } };
   const { data } = await anonClient()
@@ -17,7 +21,7 @@ export async function getServerSideProps(context) {
     .eq("lang", lang)
     .eq("published", true)
     .order("updated_at", { ascending: false });
-  return { props: { lang, setup: false, articles: sortedArticles(data || []) } };
+  return { props: { lang, setup: false, articles: sortedArticles(data || []) }, revalidate: 60 };
 }
 
 export default function Home({ lang, setup, articles = [] }) {
