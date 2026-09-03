@@ -762,13 +762,12 @@ html[lang="zh-CN"] .display {
   100% { width: 100%; opacity: 0.85; }
 }
 
-/* 路由过渡：扫描 + 揭开 */
+/* 路由过渡：金色扫描 + 10 条幕布逐列揭开 */
 .route-veil {
   position: fixed;
   inset: 0;
   z-index: 390;
   pointer-events: none;
-  background: color-mix(in srgb, var(--bg0) 92%, transparent);
   opacity: 0;
 }
 
@@ -776,52 +775,83 @@ html[lang="zh-CN"] .display {
   position: absolute;
   left: -30%;
   top: 0;
+  z-index: 2;
   width: 26%;
   height: 100%;
   background: linear-gradient(90deg, transparent, var(--glow-soft), color-mix(in srgb, var(--accent) 18%, transparent), var(--glow-soft), transparent);
-  filter: blur(6px);
+  filter: blur(7px);
 }
 
 .route-veil.is-in {
   animation: route-veil-in 300ms var(--ease-out) forwards;
-  display: block;
 }
 
 .route-veil.is-out {
   opacity: 1;
-  animation: veil-rise 650ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
-  display: block;
 }
 
-.route-veil.is-in .route-beam,
 .route-veil.is-out .route-beam {
+  opacity: 0;
+  transition: opacity 160ms linear;
+}
+
+.route-veil.is-in .route-beam {
   animation: route-beam-scan 800ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.route-col {
+  position: absolute;
+  top: 0;
+  left: calc(var(--i) * 10%);
+  width: 10%;
+  height: 100%;
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--accent) 5%, transparent), transparent 42%),
+    color-mix(in srgb, var(--bg0) 96%, #000);
+  border-right: 1px solid var(--line);
+  will-change: transform;
+}
+
+.route-col::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--grad-title);
+  box-shadow: 0 0 18px var(--glow-soft);
+  opacity: 0;
+}
+
+.route-veil.is-out .route-col {
+  animation: route-col-drop 620ms cubic-bezier(0.76, 0, 0.24, 1) both;
+  animation-delay: calc(var(--i) * 48ms);
+}
+
+.route-veil.is-out .route-col::before {
+  animation: route-edge-in 160ms var(--ease-out) calc(var(--i) * 48ms) both;
 }
 
 @keyframes route-veil-in {
   from { opacity: 0; }
-  30%, 70% { opacity: 1; }
   to { opacity: 1; }
-}
-
-@keyframes route-veil-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes veil-rise {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
 }
 
 @keyframes route-beam-scan {
   from { left: -30%; }
-  50% { left: 38%; }
+  50% { left: 40%; }
   to { left: 110%; }
+}
+
+@keyframes route-col-drop {
+  from { transform: translateY(0); }
+  to { transform: translateY(101%); }
+}
+
+@keyframes route-edge-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* 逐词显现 */
@@ -1056,8 +1086,13 @@ html[lang="zh-CN"] .display {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .route-veil.active,
-  .route-veil.active .route-beam,
+  .route-veil {
+    display: none !important;
+  }
+
+  .route-veil.is-in,
+  .route-veil.is-out .route-col,
+  .route-veil.is-out .route-col::before,
   .shimmer-text {
     animation: none !important;
   }

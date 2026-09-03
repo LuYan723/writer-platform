@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         veilTimer.current = window.setTimeout(() => {
           setVeilPhase("idle");
           setRouting(false);
-        }, 720);
+        }, 1350);
       }, 380);
     };
     router.events.on("routeChangeStart", start);
@@ -57,6 +57,9 @@ export default function App({ Component, pageProps }) {
         <div className={routing ? "route-progress active" : "route-progress"} aria-hidden="true" />
         <div className={`route-veil is-${veilPhase}`} aria-hidden="true">
           <span className="route-beam" />
+          {Array.from({ length: 10 }, (_, i) => (
+            <span key={i} className="route-col" style={{ "--i": String(i) }} />
+          ))}
         </div>
         <Component {...pageProps} />
       </SmoothScroll>
