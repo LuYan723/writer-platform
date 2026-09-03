@@ -41,6 +41,9 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SmoothScroll>
         <div className={routing ? "route-progress active" : "route-progress"} aria-hidden="true" />
+        <div className={routing ? "route-veil active" : "route-veil"} aria-hidden="true">
+          <span className="route-beam" />
+        </div>
         <Component {...pageProps} />
       </SmoothScroll>
     </>
