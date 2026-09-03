@@ -20,10 +20,11 @@ export default function WordReveal({ text, className = "", shimmer = false, dela
             key={index}
             className="word-mask"
             aria-hidden="true"
-            initial={{ opacity: 0, y: "0.7em", filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: "1.1em", rotateX: 88, filter: "blur(12px)", scale: 0.86 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)", scale: 1 }}
             viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.65, delay: delay + index * 0.045, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: "50% 100%", transformPerspective: 900 }}
+            transition={{ duration: 0.8, delay: delay + index * 0.055, ease: [0.16, 1, 0.3, 1] }}
           >
             {shimmer ? <span className="shimmer-text">{word}</span> : word}
           </motion.span>

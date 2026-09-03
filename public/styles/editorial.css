@@ -782,12 +782,20 @@ html[lang="zh-CN"] .display {
   filter: blur(6px);
 }
 
-.route-veil.active {
-  animation: route-veil-in 600ms var(--ease-out) forwards, route-veil-out 500ms var(--ease-out) 700ms forwards;
+.route-veil.is-in {
+  animation: route-veil-in 300ms var(--ease-out) forwards;
+  display: block;
 }
 
-.route-veil.active .route-beam {
-  animation: route-beam-scan 950ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+.route-veil.is-out {
+  opacity: 1;
+  animation: veil-rise 650ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  display: block;
+}
+
+.route-veil.is-in .route-beam,
+.route-veil.is-out .route-beam {
+  animation: route-beam-scan 800ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 @keyframes route-veil-in {
@@ -799,6 +807,15 @@ html[lang="zh-CN"] .display {
 @keyframes route-veil-out {
   from { opacity: 1; }
   to { opacity: 0; }
+}
+
+@keyframes veil-rise {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }
 
 @keyframes route-beam-scan {
@@ -816,6 +833,8 @@ html[lang="zh-CN"] .display {
 .word-mask {
   display: inline-block;
   margin-right: 0.24em;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 .word-mask:last-child {
@@ -867,6 +886,16 @@ html[lang="zh-CN"] .display {
   background:
     radial-gradient(420px 240px at 15% 0%, var(--glow-soft), transparent 70%),
     color-mix(in srgb, var(--bg1) 92%, transparent);
+}
+
+.quote-slide.active {
+  opacity: 1;
+  filter: none;
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+}
+
+.quote-slide:not(.active) {
+  opacity: 0.62;
 }
 
 .quote-slide blockquote {

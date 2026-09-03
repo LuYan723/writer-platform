@@ -1,18 +1,32 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SmoothScroll } from "@/components/MotionKit";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [routing, setRouting] = useState(false);
+  const [veilPhase, setVeilPhase] = useState("idle");
+  const veilTimer = useRef(null);
   useEffect(() => {
     const first = String(router.asPath || "/").split("/")[1] || "";
     document.documentElement.lang = first === "en" ? "en" : "zh-CN";
   }, [router.asPath]);
   useEffect(() => {
-    const start = () => setRouting(true);
-    const end = () => setRouting(false);
+    const start = () => {
+      setRouting(true);
+      setVeilPhase("in");
+    };
+    const end = () => {
+      if (veilTimer.current) window.clearTimeout(veilTimer.current);
+      veilTimer.current = window.setTimeout(() => {
+        setVeilPhase("out");
+        veilTimer.current = window.setTimeout(() => {
+          setVeilPhase("idle");
+          setRouting(false);
+        }, 720);
+      }, 380);
+    };
     router.events.on("routeChangeStart", start);
     router.events.on("routeChangeComplete", end);
     router.events.on("routeChangeError", end);
@@ -21,7 +35,7 @@ export default function App({ Component, pageProps }) {
       router.events.off("routeChangeComplete", end);
       router.events.off("routeChangeError", end);
     };
-  }, [router.events]);
+    }, [router.events]);
   return (
     <>
       <Head>
@@ -41,7 +55,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SmoothScroll>
         <div className={routing ? "route-progress active" : "route-progress"} aria-hidden="true" />
-        <div className={routing ? "route-veil active" : "route-veil"} aria-hidden="true">
+        <div className={`route-veil is-${veilPhase}`} aria-hidden="true">
           <span className="route-beam" />
         </div>
         <Component {...pageProps} />

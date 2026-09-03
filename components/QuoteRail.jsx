@@ -22,6 +22,13 @@ export default function QuoteRail({ quotes, isZh }) {
     scrollTo(next);
   }
 
+  function onScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+    setIndex(Math.min(Math.max(0, i), quotes.length - 1));
+  }
+
   useEffect(() => {
     if (reduce || paused) return undefined;
     const timer = window.setInterval(() => step(1), 4200);
@@ -34,9 +41,9 @@ export default function QuoteRail({ quotes, isZh }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="quote-track" ref={trackRef} aria-live="polite">
+      <div className="quote-track" ref={trackRef} onScroll={onScroll} aria-live="polite">
         {quotes.map((quote, i) => (
-          <figure className="quote-slide" key={i}>
+          <figure className={i === index ? "quote-slide active" : "quote-slide"} key={i}>
             <blockquote>“{quote.text}”</blockquote>
             <figcaption>
               <span className="quote-avatar" aria-hidden="true">{quote.name.slice(0, 1)}</span>
